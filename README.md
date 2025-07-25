@@ -1,6 +1,6 @@
-## FindGEO
+# FindGEO
 
-FindGeo is a tool for determining the coordination geometry of metals in
+**FindGeo** is a tool for determining the coordination geometry of metals in
 biological macromolecules (or in small complexes) with known structure.
 
 At present, information on metal coordination geometry can be retrieved
@@ -12,20 +12,22 @@ terminology and classification of geometries and thus (3) providing a
 reliable basis for structure–function relationship studies where
 coordination geometry is a relevant parameter.
 
-## Use
+---
 
-To use FindGeo you must have Java version 17 or greater.
+## Usage
+
+To use **FindGeo** you must have Java version 17 or greater.
 
 Many Linux/Mac systems already have a version of Java installed. Check the installed version by running: 
 
-```
+```bash
 java -version
 ```
 
 If the installed version is lower than version 17, you can still install version 17 as several versions can safely co-exist.
-In that case, you can download the compressed tar file from [https://adoptium.net/temurin/releases/](https://adoptium.net/temurin/releases/) site and unpack it in any folder, e.g. /opt and run FindGeo with:
+In that case, you can download the compressed tar file from [https://adoptium.net/temurin/releases/](https://adoptium.net/temurin/releases/) site and unpack it in any folder, e.g. /opt and run **FindGeo** with:
 
-```
+```bash
 /opt/<java-version>/bin/java -jar FindGeo-1.1.jar
 ```
 
@@ -52,6 +54,6 @@ usage: findgeo
 
 An example of use is
 
-```
+```bash
 /opt/<java-version>/bin/java -jar FindGeo-1.1.jar -p 12ca.pdb
 ```
