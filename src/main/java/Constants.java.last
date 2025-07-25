@@ -1,0 +1,99 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
+public class Constants {
+
+    private HashMap<String, List<Double>> distortedIrregular = new HashMap<>();
+    private HashMap<String, String> geometryNames = new HashMap<>();
+    private void setDistortedIrregular() {
+
+        distortedIrregular.put("boc", Arrays.asList(0.282, 0.564));
+        distortedIrregular.put("bts", Arrays.asList(0.296, 0.626));
+        distortedIrregular.put("btt", Arrays.asList(0.407, 0.737));
+        distortedIrregular.put("bva", Arrays.asList(0.395, 0.769));
+        distortedIrregular.put("bvp", Arrays.asList(0.366, 0.602));
+        distortedIrregular.put("coc", Arrays.asList(0.382, 0.714));
+        distortedIrregular.put("cof", Arrays.asList(0.410, 0.525));
+        distortedIrregular.put("con", Arrays.asList(0.439, 0.792));
+        distortedIrregular.put("csa", Arrays.asList(0.255, 0.255));
+        distortedIrregular.put("ctf", Arrays.asList(0.237, 0.587));
+        distortedIrregular.put("ctn", Arrays.asList(0.322, 0.715));
+        distortedIrregular.put("ctp", Arrays.asList(0.261, 0.671));
+        distortedIrregular.put("cub", Arrays.asList(0.306, 0.687));
+        distortedIrregular.put("cuv", Arrays.asList(0.283, 0.533));
+        distortedIrregular.put("hbp", Arrays.asList(0.282, 0.678));
+        distortedIrregular.put("hva", Arrays.asList(0.283, 0.714));
+        distortedIrregular.put("hvp", Arrays.asList(0.348, 0.583));
+        distortedIrregular.put("lin", Arrays.asList(0.777, 0.777));
+        distortedIrregular.put("oct", Arrays.asList(0.395, 0.792));
+        distortedIrregular.put("pbp", Arrays.asList(0.373, 0.649));
+        distortedIrregular.put("pva", Arrays.asList(0.237, 0.787));
+        distortedIrregular.put("pvp", Arrays.asList(0.322, 0.613));
+        distortedIrregular.put("pyv", Arrays.asList(0.366, 0.812));
+        distortedIrregular.put("sav", Arrays.asList(0.261, 0.554));
+        distortedIrregular.put("spl", Arrays.asList(0.507, 0.896));
+        distortedIrregular.put("spv", Arrays.asList(0.608, 0.634));
+        distortedIrregular.put("spy", Arrays.asList(0.466, 0.522));
+        distortedIrregular.put("sqa", Arrays.asList(0.296, 0.737));
+        distortedIrregular.put("tbp", Arrays.asList(0.466, 0.494));
+        distortedIrregular.put("tet", Arrays.asList(0.395, 0.896));
+        distortedIrregular.put("tev", Arrays.asList(0.356, 0.608));
+        distortedIrregular.put("tpr", Arrays.asList(0.434, 0.715));
+        distortedIrregular.put("tpv", Arrays.asList(0.494, 0.522));
+        distortedIrregular.put("tri", Arrays.asList(0.356, 0.634));
+        distortedIrregular.put("trv", Arrays.asList(0.777, 0.777));
+        distortedIrregular.put("ttp", Arrays.asList(0.255, 0.255));
+
+    }
+
+    public HashMap<String, List<Double>> getDistortedIrregular() {
+        setDistortedIrregular();
+        return distortedIrregular;
+    }
+
+    private void setGeometryNames() {
+        geometryNames.put("boc", "OCTAHEDRAL, TRANS-BICAPPED");
+        geometryNames.put("bts", "TRIGONAL PRISM, SQUARE-FACE BICAPPED");
+        geometryNames.put("btt", "TRIGONAL PRISM, TRIANGULAR-FACE BICAPPED");
+        geometryNames.put("bva", "TRIGONAL BIPYRAMID WITH A VACANCY (AXIAL)");
+        geometryNames.put("bvp", "TRIGONAL BIPYRAMID WITH A VACANCY (EQUATORIAL)");
+        geometryNames.put("coc", "OCTAHEDRON FACE MONOCAPPED");
+        geometryNames.put("cof", "OCTAHEDRON FACE MONOCAPPED WITH A VACANCY (CAPPED FACE)");
+        geometryNames.put("con", "OCTAHEDRON FACE MONOCAPPED WITH A VACANCY (NON-CAPPED FACE");
+        geometryNames.put("csa", "SQUARE ANTIPRISM, SQUARE-FACE MONOCAPPED");
+        geometryNames.put("ctf", "TRIGONAL PRISM, SQUARE-FACE MONOCAPPED WITH A VACANCY (CAPPED FACE)");
+        geometryNames.put("ctn", "TRIGONAL PRISM, SQUARE-FACE MONOCAPPED WITH A VACANCY (NON-CAPPED EDGE)");
+        geometryNames.put("ctp", "TRIGONAL PRISM, SQUARE-FACE MONOCAPPED");
+        geometryNames.put("cub", "CUBE");
+        geometryNames.put("cuv", "CUBE WITH A VACANCY");
+        geometryNames.put("hbp", "HEXAGONAL BIPYRAMID");
+        geometryNames.put("hva", "HEXAGONAL BIPYRAMID WITH A VACANCY (AXIAL)");
+        geometryNames.put("hvp", "HEXAGONAL BIPYRAMID WITH A VACANCY (EQUATORIAL)");
+        geometryNames.put("lin", "LINEAR");
+        geometryNames.put("oct", "OCTAHEDRON");
+        geometryNames.put("pbp", "PENTAGONAL BIPYRAMID");
+        geometryNames.put("pva", "PENTAGONAL BIPYRAMID WITH A VACANCY (AXIAL)");
+        geometryNames.put("pvp", "PENTAGONAL BIPYRAMID WITH A VACANCY (EQUATORIAL)");
+        geometryNames.put("pyv", "SQUARE PYRAMID WITH A VACANCY (EQUATORIAL)");
+        geometryNames.put("sav", "SQUARE ANTIPRISM WITH A VACANCY");
+        geometryNames.put("spl", "SQUARE PLANE");
+        geometryNames.put("spy", "SQUARE PYRAMID");
+        geometryNames.put("sqa", "SQUARE ANTIPRISM");
+        geometryNames.put("spv", "SQUARE PLANE WITH A VACANCY");
+        geometryNames.put("tbp", "TRIGONAL BIPYRAMID");
+        geometryNames.put("tet", "TETRAHEDRON");
+        geometryNames.put("tev", "TETRAHEDRON WITH A VACANCY");
+        geometryNames.put("tpr", "TRIGONAL PRISM");
+        geometryNames.put("tpv", "TRIGONAL PRISM WITH A VACANCY");
+        geometryNames.put("tri", "TRIGONAL PLANE");
+        geometryNames.put("trv", "TRIGONAL PLANE WITH A VACANCY");
+        geometryNames.put("ttp", "TRIGONAL PRISM, SQUARE-FACE TRICAPPED");
+
+    }
+
+    public HashMap<String, String> getGeometryNames() {
+        setGeometryNames();
+        return geometryNames;
+    }
+}
