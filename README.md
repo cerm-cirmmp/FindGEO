@@ -6,7 +6,7 @@ biological macromolecules (or in small complexes) with known structure.
 At present, information on metal coordination geometry can be retrieved
 only by exploring the primary literature, which however sometimes contains
 an improper or incorrect description of the geometry, and often lacks it
-altogether. Therefore, the use of FindGeo will benefit scientists by: (1)
+altogether. Therefore, the use of **FindGeo** will benefit scientists by: (1)
 minimizing errors in the assignment of geometries, (2) promoting a uniform
 terminology and classification of geometries and thus (3) providing a
 reliable basis for structure–function relationship studies where
@@ -31,7 +31,7 @@ In that case, you can download the compressed tar file from [https://adoptium.ne
 /opt/<java-version>/bin/java -jar FindGeo-1.1.jar
 ```
 
-Running FindGeo without options will show a help with the various options available
+Running **FindGeo** without options will show a help with the various options available
 
 ```
 usage: findgeo
