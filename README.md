@@ -1,5 +1,18 @@
 ## FindGEO
 
+FindGeo is a tool for determining the coordination geometry of metals in
+biological macromolecules (or in small complexes) with known structure.
+
+At present, information on metal coordination geometry can be retrieved
+only by exploring the primary literature, which however sometimes contains
+an improper or incorrect description of the geometry, and often lacks it
+altogether. Therefore, the use of FindGeo will benefit scientists by: (1)
+minimizing errors in the assignment of geometries, (2) promoting a uniform
+terminology and classification of geometries and thus (3) providing a
+reliable basis for structure–function relationship studies where
+coordination geometry is a relevant parameter.
+
+## Use
 
 To use FindGeo you must have Java version 17 or greater.
 
