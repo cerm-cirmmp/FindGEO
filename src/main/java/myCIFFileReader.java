@@ -12,6 +12,9 @@ public class myCIFFileReader {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                if(line.startsWith("#") || line.startsWith("_") || line.startsWith("loop_")) {
+                    continue;
+                }
                 CIFStructure cif_structure = new CIFStructure();
                 String[] structure = line.split(" ");
                 cif_structure.setRecordName(structure[0]);

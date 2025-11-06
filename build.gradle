@@ -33,6 +33,7 @@ dependencies {
     implementation 'openchart:openchart:1.4.2'
     implementation 'org.biojava:biojava-core:7.2.2'
     implementation 'org.biojava:biojava-structure:7.2.2'
+    implementation 'org.rcsb:ciftools-java:7.0.2'
     implementation 'commons-cli:commons-cli:1.5.0'
     implementation 'commons-io:commons-io:2.14.0'
     implementation 'gov.nist.math:jama:1.0.3'

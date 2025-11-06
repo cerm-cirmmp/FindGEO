@@ -220,7 +220,7 @@ public class FindGeoMP {
 
     private void calcBestResult() {
 
-        if (nlig < 1 || nlig > maxlig) {
+        if (nlig < 2 || nlig > maxlig) {
             Formatter output;
 
             try {

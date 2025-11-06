@@ -5,8 +5,6 @@ import org.biojava.nbio.structure.align.util.AtomCache;
 import org.biojava.nbio.structure.io.StructureFiletype;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -31,13 +29,14 @@ public class FindGeo {
         private static String pdbFile = null;
 
         private static String localPdbFileType = null;
-        private static Double treshold = 2.8;
+        private static Double threshold = 2.8;
         private static String workdir = "." + File.separator;
         private static String metal = null;
         private static List<String> notDonors = Arrays.asList("H", "C");
+        private static List<String> notMetals = new ArrayList<>();
         private static String key = null;
 
-        private static String delimiter = File.separator;
+        private static final String delimiter = File.separator;
         public static void main(String[] args) throws IOException, StructureException {
 
             // To avoid WARN messages from BioJava
@@ -49,10 +48,11 @@ public class FindGeo {
             System.out.println("Input parameters");
             printLine();
             System.out.println("PDB: " + pdbFile);
-            System.out.println("Threshold: " + treshold);
+            System.out.println("Threshold: " + threshold);
             System.out.println("Metal: " + metal);
             System.out.println("Workdir: " + workdir);
-            System.out.println("Not Donors: " + notDonors.toString());
+            System.out.println("Donors excluded: " + notDonors.toString());
+            System.out.println("Metals excluded: " + notMetals.toString());
             printLine();
 
 
@@ -158,7 +158,7 @@ public class FindGeo {
                             double y = m.getY() - a.getY();
                             double z = m.getZ() - a.getZ();
                             double distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
-                            if (distance < treshold && !a.getName().equals(m.getName()) && !notDonors.contains(a.getElement().toString().toUpperCase()) && !metalList.contains(a.getElement().toString().toUpperCase())) {
+                            if (distance < threshold && !a.getName().equals(m.getName()) && !notDonors.contains(a.getElement().toString().toUpperCase()) && !metalList.contains(a.getElement().toString().toUpperCase())) {
                                 //System.out.println(a);
                                 ligands.add(a);
                             }
@@ -185,7 +185,7 @@ public class FindGeo {
             for (Chain c : chains) {
                 for (Group g : c.getAtomGroups(GroupType.HETATM)) {
                     for (Atom a : g.getAtoms()) {
-                        if (metalList.contains(a.getElement().toString().toUpperCase())) {
+                        if (metalList.contains(a.getElement().toString().toUpperCase()) && !notMetals.contains(a.getElement().toString().toUpperCase())) {
                             //System.out.println(a);
                             metals.add(a);
 
@@ -236,6 +236,31 @@ public class FindGeo {
     private static void createFindgeoCIFInput(Structure structure, String out, Atom metal, List<Atom> ligands) {
         try {
 
+            String header = """
+#
+loop_
+_atom_site.group_PDB
+_atom_site.id
+_atom_site.type_symbol
+_atom_site.label_atom_id
+_atom_site.label_alt_id
+_atom_site.label_comp_id
+_atom_site.label_asym_id
+_atom_site.label_entity_id
+_atom_site.label_seq_id
+_atom_site.pdbx_PDB_ins_code
+_atom_site.Cartn_x
+_atom_site.Cartn_y
+_atom_site.Cartn_z
+_atom_site.occupancy
+_atom_site.B_iso_or_equiv
+_atom_site.auth_seq_id
+_atom_site.auth_comp_id
+_atom_site.auth_asym_id
+_atom_site.auth_atom_id
+_atom_site.pdbx_PDB_model_num
+                   """;
+
             File outDir = new File(workdir + delimiter + out);
             createDir(outDir);
 
@@ -245,13 +270,18 @@ public class FindGeo {
                 System.out.println("Chain: " + line.substring(21,22));
                 bw.write(line.substring(0, 21) + "A" + line.substring(22, line.length()));*/
 
-
+            bw.write(header);
             List<String> str = Arrays.asList(structure.toMMCIF().split("\n"));
 
             for(String s: str) {
                 if(s.startsWith("ATOM") || s.startsWith("HETATM")) {
+                    //System.out.println(s);
                     String pdbSerial = s.split(" ")[1];
                     if(pdbSerial.equals(String.valueOf(metal.getPDBserial()))) {
+                       /* String[] fields = s.split(" ");
+                        for(String f: fields) {
+                            bw.write(f + "\t");
+                        }*/
                         bw.write(s + "\n");
                     }
                 }
@@ -286,11 +316,12 @@ public class FindGeo {
         /**
          * Parse line arguments, perform some checks and sets the following variables:
          * pdbFile: contains the PDB filename or the PDB code
-         * treshold: the coordination distance threshold
+         * threshold: the coordination distance threshold
          * overwrite: if TRUE overwrite existing files and directories
          * workdir: directory where to find or download the input PDB file and to write outputs
          * metal: chemical symbol of the metal of interest.
          * notDonors: string list containing the chemical symbols of the atoms excluded from metal ligands
+         * notMetals: string list containing the metal symbols excluded from the analysis.
          *
          * @param args  arguments list from command line
          */
@@ -300,7 +331,8 @@ public class FindGeo {
             opt.addOption("p", "pdb", true, "Local input PDB file or PDB code of input PDB file to be downloaded from the web.");
             opt.addOption("i", "input", true, "Local PDB/mmCIF local file.");
             opt.addOption("f", "format", true, "Local file format (i.e. cif or pdb).");
-            opt.addOption("e", "excluded_donors", true, "Chemical symbols of the atoms (separated by commas) excluded from metal ligands. Default is C and H.");
+            opt.addOption("e", "excluded-donors", true, "Chemical symbols of the atoms (separated by commas) excluded from metal ligands. Default is C and H.");
+            opt.addOption("x", "excluded-metals", true, "Metal symbols (separated by commas) excluded from the analysis.");
             opt.addOption("t", "threshold", true, "Coordination distance threshold. Default is 2.8 A.");
             opt.addOption("o", "overwrite", false, "Overwrite existing files and directories.");
             opt.addOption("m", "metal", true, "Chemical symbol of the metal of interest. Default is all metals.");
@@ -340,12 +372,10 @@ public class FindGeo {
                     pdbFile = cmd.getOptionValue("p");
                 }
 
-
-
                 if (cmd.hasOption("t")) {
                     String tshold = cmd.getOptionValue("t");
                     try {
-                        treshold = Double.parseDouble(tshold);
+                        threshold = Double.parseDouble(tshold);
                     } catch (Exception e) {
                         throw new ParseException("Invalid threshold. This must be a number.");
                     }
@@ -373,6 +403,15 @@ public class FindGeo {
                 if (cmd.hasOption("e")) {
                     try {
                         notDonors = Arrays.asList(cmd.getOptionValue("e").replace(" ", "").split(","));
+                    } catch (Exception e) {
+                        throw new ParseException("Unexpected exception: " + e);
+                    }
+                }
+
+                if (cmd.hasOption("x")) {
+                    try {
+                        notMetals = Arrays.asList(cmd.getOptionValue("x").replace(" ", "").split(","));
+                        notMetals.replaceAll(String::toUpperCase);
                     } catch (Exception e) {
                         throw new ParseException("Unexpected exception: " + e);
                     }
