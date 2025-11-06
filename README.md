@@ -50,6 +50,9 @@ usage: findgeo
  -w,--workdir <arg>           Directory where to find or download the
                               input PDB file and to write outputs. Default
                               is ./
+ -x,--excluded-metals <arg>   Metal symbols (separated by commas) excluded
+                              from the analysis.
+
 ```
 
 An example of use is
