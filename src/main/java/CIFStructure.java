@@ -40,7 +40,7 @@ public class CIFStructure {
     private float occupancy;
     private double B_iso_or_equiv;
     private String pdbx_formal_charge;
-    private int auth_seq_id;
+    private String auth_seq_id;
     private String auth_comp_id;
     private String auth_asym_id;
     private String auth_atom_id;
@@ -174,11 +174,11 @@ public class CIFStructure {
         this.pdbx_formal_charge = pdbx_formal_charge;
     }
 
-    public int getAuth_seq_id() {
+    public String getAuth_seq_id() {
         return auth_seq_id;
     }
 
-    public void setAuth_seq_id(int auth_seq_id) {
+    public void setAuth_seq_id(String auth_seq_id) {
         this.auth_seq_id = auth_seq_id;
     }
 

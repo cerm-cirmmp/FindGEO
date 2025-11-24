@@ -25,7 +25,7 @@ public class myCIFFileReader {
                 cif_structure.setResidueName(structure[5]);
                 cif_structure.setAuth_asym_id(structure[6]);
                 cif_structure.setLabel_entity_id(Integer.parseInt(structure[7]));
-                cif_structure.setAuth_seq_id(Integer.parseInt(structure[8]));
+                cif_structure.setAuth_seq_id(structure[8]);
                 cif_structure.setPdbx_PDB_ins_code(structure[9]);
                 cif_structure.setXCoordinate(Double.parseDouble(structure[10]));
                 cif_structure.setYCoordinate(Double.parseDouble(structure[11]));

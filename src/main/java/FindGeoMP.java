@@ -167,6 +167,7 @@ public class FindGeoMP {
         //List<PDBStructure> structure = pdbFileReader.readPDBFile(findGeoInput);
         myCIFFileReader cifFileReader = new myCIFFileReader();
         List<CIFStructure> structure = cifFileReader.readCIFFile(findGeoInput);
+
         nlig = -1;
         for(CIFStructure s: structure) {
             nlig++;
@@ -176,6 +177,7 @@ public class FindGeoMP {
                 printLine();
                 System.exit(-1);
             }
+
             if (nlig == 0) {
                 matnum = s.getAtomNumber();
                 matnam = s.getAtomName();
